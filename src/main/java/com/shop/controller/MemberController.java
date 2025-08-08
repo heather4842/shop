@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
-
+//test
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
