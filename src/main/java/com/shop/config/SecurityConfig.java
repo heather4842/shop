@@ -16,6 +16,19 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.formLogin((it) -> it
+                .loginPage("/members/login")
+                .defaultSuccessUrl("/")
+                .usernameParameter("email")
+                .failureUrl("/members/login/error")
+        );
+
+//        http.csrf((csrf) -> csrf.disable());
+
+        http.logout((logout) -> logout
+                .logoutUrl("/members/logout")
+                .logoutSuccessUrl("/")
+        );
         return http.build();
     }
 
