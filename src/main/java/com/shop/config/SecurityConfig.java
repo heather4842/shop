@@ -10,6 +10,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import java.security.Security;
 
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -29,6 +31,21 @@ public class SecurityConfig {
                 .logoutUrl("/members/logout")
                 .logoutSuccessUrl("/")
         );
+
+        http.authorizeHttpRequests((req)->{req
+                .requestMatchers("/", "/members/**", "/item/**", "/images/**").permitAll()
+                .requestMatchers(("/admin/**")).hasRole("ADMIN")
+                .anyRequest().authenticated();
+        });
+
+        http.exceptionHandling((e) -> e
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                .accessDeniedHandler(new CustomAccessDeniedHandler())
+        );
+
+
+
+
         return http.build();
     }
 

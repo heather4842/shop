@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Getter @Setter
 @ToString
 
-public class Member {
+public class Member extends BaseEntity {
     @Id
     @Column (name="member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,7 @@ public class Member {
         member.setEmail(memberFormDto.getEmail());
         member.setAddress(memberFormDto.getAddress());
         member.setPassword(passwordEncoder.encode(memberFormDto.getPassword()));
-        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN);
         return member;
 
     }
