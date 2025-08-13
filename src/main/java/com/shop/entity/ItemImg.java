@@ -19,11 +19,8 @@ public class ItemImg extends BaseEntity {
     private Long id;
 
     private String imgName;
-
     private String oriImgName;
-
     private String imgUrl;
-
     private String repimgYn;
 
     @ManyToOne(fetch = FetchType.LAZY)
