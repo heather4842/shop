@@ -8,7 +8,7 @@ import lombok.ToString;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Entity
-@Table
+@Table(name = "cart")
 @Getter @Setter
 @ToString
 public class Cart extends BaseEntity{
@@ -21,5 +21,13 @@ public class Cart extends BaseEntity{
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+
+    public static Cart createCart(Member member){
+        Cart cart = new Cart();
+        cart.setMember(member);
+        return cart;
+    }
+
 
 }
